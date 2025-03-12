@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html'%}
+
+{% block content %}
+<a href="{% url 'create-post' %}">Создать пост</a>
+{% for p in post %}
+{{p.title}}
+{{p.content|safe}}
+{{p.category}}
+{{p.data_created}}
+{% endfor %}
+
+{% endblock %}

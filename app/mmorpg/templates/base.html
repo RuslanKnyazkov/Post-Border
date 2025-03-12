@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}">
+</script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 </head>
 <body>
-$END$
+{%block content%}
+<a href="{% url 'create-post' %}">Создать пост</a>
+
+{%endblock%}
 </body>
 </html>

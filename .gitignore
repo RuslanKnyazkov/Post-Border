@@ -1,2 +1,5 @@
 venv/
-*__pycahce__/
+__pycahce__/
+.idea/
+static/admin/
+static/ckeditor/
