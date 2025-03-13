@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<form action="{% url 'code'%}" method="post">
+    {% csrf_token%}
+    <input type="text" name="username" value={{request.user.username}}>
+    <input type="text" name="code">
+    <button type="submit">Send</button>
+</form>
+
+{% endblock%}
