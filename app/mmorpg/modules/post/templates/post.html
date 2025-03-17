@@ -2,11 +2,30 @@
 
 {% block content %}
 <a href="{% url 'create-post' %}">Создать пост</a>
-{% for p in post %}
-{{p.title}}
-{{p.content|safe}}
-{{p.category}}
-{{p.data_created}}
-{% endfor %}
+<div style="display: block; max-width:600px; min-width:300px; background:mediumpurple;
+    ">
+    {% for p in post %}
+    <div style="display: block">
+        <div style="display:flex;">
+            <div style="position: relative; left: 80%; width: 20%; padding:5px">
+                {{p.category}}
+            </div>
+            <div style="width: 60%; text-align:left; padding:5px;">
+                {{p.title}}
+            </div>
+        </div>
+
+        <div style="width:100%; text-align:center; background:antiquewhite">
+            {{p.content|safe}}
+        </div>
+        <div style="position: relative; left: 70%; width: 100%; padding:5px">
+            {{p.data_created}}
+        </div>
+        <a href="{% url 'detail' p.id%}"><button>Перейти</button></a>
+    </div>
+
+    {% endfor %}
+</div>
+
 
 {% endblock %}

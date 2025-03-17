@@ -46,7 +46,7 @@ class Category(models.Model):
 
 
 class Reaction(models.Model):
-    user = models.OneToOneField(User,
+    user = models.ForeignKey(User,
                                 on_delete=models.CASCADE)
     post_id = models.ForeignKey('Post',on_delete=models.CASCADE)
     text = models.TextField()

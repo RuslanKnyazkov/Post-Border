@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Reaction
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
@@ -12,3 +12,11 @@ class PostForm(forms.ModelForm):
         widgets = {
             'content' : CKEditorUploadingWidget()
         }
+
+class ReactionForm(forms.ModelForm):
+    text = forms.CharField(label='Комментарий', widget=forms.TextInput(
+        attrs={'class': 'form-control'}
+    ))
+    class Meta:
+        model = Reaction
+        fields = ['text']

@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
-    'modules.post',
+    'modules.post.apps.PostConfig',
     'modules.signin',
+    'modules.profiles.apps.ProfilesConfig'
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [path.join(BASE_DIR, 'templates'),
-                 path.join(BASE_DIR, 'modules/post/templates')],
+                 path.join(BASE_DIR, 'modules/post/templates'),
+                 path.join(BASE_DIR, 'modules/profile/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,7 +117,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

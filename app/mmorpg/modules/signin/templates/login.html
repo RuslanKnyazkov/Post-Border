@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {%block content%}
-<form action="{% url 'get_info'%}" method="post">
+<form action="{% url 'get_info' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Push</button>
+    <button type="submit" >Push</button>
 </form>
 
+<p>Если у вас не учетной записи</p>
+<a href="{% url 'registration'%}">Registration</a>
+
+
+
 {% endblock %}
+
+
+{% block script %}
+<script src="{% static 'js/test.js'%}"></script>
+{% endblock%}

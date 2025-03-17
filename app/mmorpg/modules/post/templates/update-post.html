@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'update' items.id %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Изменить</button>
+</form>
+
+{% endblock %}

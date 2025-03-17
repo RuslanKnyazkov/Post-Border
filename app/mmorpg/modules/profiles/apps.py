@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class PostConfig(AppConfig):
+class ProfilesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'modules.post'
+    name = 'modules.profiles'
 
     def ready(self):
-        import modules.post.signals
+        import modules.profiles.signals

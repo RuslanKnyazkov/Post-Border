@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div>
+    <div>
+        {{profile.user}}
+    </div>
+    <div>
+        {{profile.email}}
+    </div>
+    <div>
+        {{profile.phone}}
+    </div>
+    <div>
+        {% if profile.bio %}
+        {{profile.bio}}
+        {% else %}
+        <p>Ваша биография пуста</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
