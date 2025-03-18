@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if queryset %}
+<div class="detail-post-container">
+    <div class="top">
+        <a href="{% url 'profile' queryset.user.id%}">@{{queryset.user}}</a>
+        {{ queryset.data_created }}
+    </div>
+    <div class="middle">
+        {{ queryset.title}}
+        {{queryset.content | safe}}
+    </div>
+    <div class="bottom">
+        <div class="action">
+        </div>
+
+    </div>
+</div>
+{% endif %}
+
+<div class="reaction-container">
+    {% for r in reaction %}
+    <div class="head-reaction">
+        {{r.user}}
+    </div>
+    <div class="content-reaction">
+        {{ r.text }}
+    </div>
+    <div class="action-reaction">
+        <form action="">
+            <button type="submit" class="btn btn-success">Принять</button>
+        </form>
+        <form action="">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+
+<form action="{% url 'filter'%}" method="get">
+    {% for p in post %}
+    <div class="list-title">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <input type="radio" name="title" id="title" value="{{p.title}}">
+                <label for="title">{{p.title}}</label>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+    <button type="submit">Найти</button>
+</form>
+
+
+{% endblock %}

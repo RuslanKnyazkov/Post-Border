@@ -2,8 +2,27 @@
 
 {% block content %}
 <div class="detail-post-container">
-    {{single.content | safe}}
-    <a href="{% url 'update' single.pk %}"> Редактировать</a>
+    <div class="top">
+        <a href="{% url 'profile' single.user.id%}">@{{single.user}}</a>
+        {{ single.data_created }}
+    </div>
+    <div class="middle">
+        {{ single.title}}
+        {{single.content | safe}}
+    </div>
+    <div class="bottom">
+        <div class="actions">
+            <a href="{% url 'update' single.pk %}">
+                <button class="btn btn-primary">Редактировать</button>
+            </a>
+            <form action="{% url 'post-delete' single.pk%}" method="post">
+                {% csrf_token%}
+                <a href="">
+                    <button class="btn btn-success">Удалить</button>
+                </a>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="reaction">
@@ -16,15 +35,26 @@
     </form>
 </div>
 
-{% for reaction in reactions %}
-<div class="comment-block">
-    <div class="item-user">
-        {{ reaction.user }}
+<div class="container-reaction">
+    {% for reaction in reactions %}
+    <div class="comment-block">
+        <div class="item-user">
+            {{ reaction.user }}
+        </div>
+        <div class="item-text">
+            {{reaction.text}}
+        </div>
+        <div>
+            <a href="{% url 'update-reaction' reaction.id%}">
+                <button class="btn btn-success">Редактировать</button></a>
+            <form action="{% url 'reaction-delete' reaction.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-success" type="submit">Удалить</button>
+            </form>
+        </div>
     </div>
-    <div class="item-text">
-        {{reaction.text}}
-    </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
 
 {% endblock %}

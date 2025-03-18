@@ -11,6 +11,7 @@
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
 </head>
 <body>
 
@@ -48,22 +49,19 @@
     </div>
 </nav>
 
-
-<div style="display: flex;
-    width: 80%;
-    justify-content: center;
-    flex-wrap: wrap;">
-
-    <div style="display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 70%;">
-        {% block content %}
-        {% endblock %}
-    </div>
+<div class="content-container">
     <div class="sidebar">
+        {% block sidebar %}
+        {% endblock%}
+    </div>
+    <div class="container-fluid">
+        <div class="content">
+          {% block content %}
+        {% endblock %}
+        </div>
 
     </div>
+</div>
 </div>
 
 
