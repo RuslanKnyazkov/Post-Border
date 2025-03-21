@@ -19,6 +19,7 @@
 </div>
 {% endif %}
 
+{% if reaction %}
 <div class="reaction-container">
     {% for r in reaction %}
     <div class="head-reaction">
@@ -28,17 +29,24 @@
         {{ r.text }}
     </div>
     <div class="action-reaction">
-        <form action="">
+        {% if r.validate %}
+        принятый отклик
+        {% else %}
+        <form action="{% url 'validate' r.id%}" method="post">
+            {% csrf_token %}
             <button type="submit" class="btn btn-success">Принять</button>
         </form>
-        <form action="">
+        {% endif %}
+        <form action="{% url 'reaction-delete' r.id%}" method="post">
+            {% csrf_token %}
             <button type="submit" class="btn btn-danger">Удалить</button>
         </form>
+
     </div>
 
     {% endfor %}
 </div>
-
+{% endif %}
 
 {% endblock %}
 
@@ -49,6 +57,7 @@
 <form action="{% url 'filter'%}" method="get">
     {% for p in post %}
     <div class="list-title">
+        <p style="padding:3px; margin-left:3px">Посты</p>
         <ul class="list-group">
             <li class="list-group-item">
                 <input type="radio" name="title" id="title" value="{{p.title}}">

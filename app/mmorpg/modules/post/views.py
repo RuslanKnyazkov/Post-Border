@@ -1,3 +1,5 @@
+from django.core.mail import EmailMessage
+
 from .models import Post, Reaction, User
 from .forms import PostForm, ReactionForm
 from django.views.generic import (ListView, CreateView,
@@ -83,12 +85,27 @@ def update_reaction(request, pk):
     instance = get_object_or_404(Reaction, pk=pk)
     form = ReactionForm(request.POST, instance=instance)
     if form.is_valid():
+        if 'validate' in request.GET:
+            form.validate = True
         form.save()
         return redirect('post')
     else:
         form = ReactionForm(instance=instance)
     return render(request, 'update-reaction.html', {'form': form,
                                                     'items': instance})
+
+@login_required()
+def validate_reaction(request, pk):
+    if request.method == 'POST':
+        instance = Reaction.objects.get(id = pk)
+        instance.validate = True
+        instance.save()
+        message = EmailMessage(subject='Board Post Servise',
+                     body=f'Ваш отклик был принят'
+                          f'пользователем {request.user}.',
+                     to=[f'{instance.user.email}'])
+        message.send()
+    return redirect('filter')
 
 
 @login_required()

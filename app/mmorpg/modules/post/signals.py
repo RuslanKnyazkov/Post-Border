@@ -17,4 +17,4 @@ def send_notification_after_created_reaction(sender, created,
                                 to=[f'{user.email}'])
         exsample.send()
     else:
-        print('Реакция измененна')
+        pass

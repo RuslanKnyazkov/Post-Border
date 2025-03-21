@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from os import path
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-10s0pzi13zomsj7a65n^s+h5&5r3npofa$^k^+sxsto4n#fh+-'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -142,10 +143,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 #EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = 2525
-EMAIL_HOST_USER = 'rus.knyazkov.94@mail.ru'
-EMAIL_HOST_PASSWORD = 'peWDNiiNCiM0EGYP9xP0'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
@@ -154,3 +155,12 @@ EMAIL_ADMIN = (EMAIL_HOST_USER)
 
 
 LOGIN_URL = 'login'
+
+#Celery config
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_RESULT_SERIALIZER = 'json'

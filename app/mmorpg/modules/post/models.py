@@ -50,6 +50,8 @@ class Reaction(models.Model):
                                 on_delete=models.CASCADE)
     post_id = models.ForeignKey('Post',on_delete=models.CASCADE)
     text = models.TextField()
+    validate = models.BooleanField(verbose_name='потвержденный отклик',
+                                   default=False)
 
     def __str__(self):
         return f'{self.post_id}\n {self.text}'
