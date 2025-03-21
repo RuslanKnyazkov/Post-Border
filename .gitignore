@@ -4,3 +4,4 @@ __pycache__
 admin/
 ckeditor/
 *migrations
+.env
